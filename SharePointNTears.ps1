@@ -1,6 +1,6 @@
 #Parameters
 Import-Module PnP.PowerShell
-$SiteURL = "https://####-admin.sharepoint.com/"
+$SiteURL = "https://###-admin.sharepoint.com/"
 $TodayDate = Get-Date -Format "MM-dd-yyyy"
 $CSVPath = "AllSiteOwners - "+$TodayDate+".csv"
   
