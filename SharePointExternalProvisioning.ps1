@@ -57,6 +57,44 @@ Function Find-ExtSite{
         Write-Host $_.Url.PadRight(50) $_.Title.PadRight(30) $_.Template
     }
 }
+Function Grant-AdminPriveleges{
+    Clear-Host
+    Write-Host "Grant Admin Privileges to user under a SharePoint site."
+    $siteUrl= Read-Host -Prompt "Enter the site url:"
+    $userEmail = Read-Host -Prompt "Enter the user email:"
+    Set-SPOUser -Site $siteUrl -LoginName $userEmail -IsSiteCollectionAdmin $true
+}
+Function Revoke-AdminPriveleges{
+    Clear-Host
+    Write-Host "Revoke Admin Privileges to user under a SharePoint site."
+    $siteUrl= Read-Host -Prompt "Enter the site url:"
+    $userEmail = Read-Host -Prompt "Enter the user email:"
+    Set-SPOUser -Site $siteUrl -LoginName $userEmail -IsSiteCollectionAdmin $false
+}
+
+Function List-UsersUnderGroup{
+
+    $siteUrl = Read-Host -Prompt "Enter the site url:"
+    $groupName = Read-Host -Prompt "Enter the group name:"
+    $membersGroup = Get-SPOSiteGroup -Site $siteUrl | Where-Object { $_.Title -eq $groupName }
+    Get-SPOUser -Site $siteUrl -Group $membersGroup.Title
+}
+
+Function Add-UsersToGroup{
+
+    $siteUrl = Read-Host -Prompt "Enter the site url:"
+    $groupName = Read-Host -Prompt "Enter the group name:"
+    $membersGroup = Get-SPOSiteGroup -Site $siteUrl | Where-Object { $_.Title -eq $groupName }
+    Get-SPOUser -Site $siteUrl -Group $membersGroup.Title
+}
+Function Remove-UsersFromGroup{
+
+    $siteUrl = Read-Host -Prompt "Enter the site url:"
+    $groupName = Read-Host -Prompt "Enter the group name:"
+    $TargetGroup = Get-SPOSiteGroup -Site $siteUrl | Where-Object { $_.Title -eq $groupName }
+    Remove-SPOUser -Site $siteUrl -LoginName $groupName -Group $TargetGroup.Title
+}
+
 
 function Show-Menu {
     Clear-Host
@@ -65,6 +103,10 @@ function Show-Menu {
     Write-Output "====================="
     Write-Output "1: Create New External Site"
     Write-Output "2: Find External Site"
+    Write-Output "3: Grant Site Administrator Privilege"
+    Write-Output "4: Revoke Site Administrator Privilege"
+    Write-Output "5: List Group Users Under Site"
+    Write-Output "6: Add User to a SharePoint Site Group."
     Write-Output "0: Exit"
     Write-Output "====================="
 }
@@ -77,6 +119,9 @@ do {
     switch ($choice) {
         1 { New-ExtSite }
         2 { Find-ExtSite}
+        3 { Grant-AdminPriveleges}
+        4 { Revoke-AdminPriveleges}
+        5 { List-UsersUnderGroup}
         default { Write-Output "Invalid choice, please try again." }
     }
 
