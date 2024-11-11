@@ -4,13 +4,13 @@
 # Install-Module -Name Microsoft.Online.SharePoint.PowerShell -Scope CurrentUser -Force
 
 Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking 
-Connect-SPOService -Url "https://gg0rsk1-admin.sharepoint.com" -ModernAuth $true -AuthenticationUrl "https://login.microsoftonline.com/organizations"
+Connect-SPOService -Url "https://-admin.sharepoint.com" -ModernAuth $true -AuthenticationUrl "https://login.microsoftonline.com/organizations"
 
 Function New-ExtSite{
     Clear-Host
     Write-Host "To avoid creating duplicates, please make sure you confirmed no existing site for Vendor/Company."
     $vendorName= Read-Host -Prompt "Enter the vendor/company name"
-    $siteURL = "https://gg0rsk1.sharepoint.com/sites/"+$vendorName+"-EXTERNAL"
+    $siteURL = "https://.sharepoint.com/sites/"+$vendorName+"-EXTERNAL"
     $siteName= $vendorName+"-EXTERNAL"
 
 
@@ -19,7 +19,7 @@ Function New-ExtSite{
     Write-Host "Site Name: " $siteName
 
     #Create a Communication Template New Site
-    New-SPOSite -Url $siteURL -Owner "ggorski1@gg0rsk1.onmicrosoft.com" -StorageQuota 1024 -Title $siteName -Template "SITEPAGEPUBLISHING#0"
+    New-SPOSite -Url $siteURL -Owner "@.onmicrosoft.com" -StorageQuota 1024 -Title $siteName -Template "SITEPAGEPUBLISHING#0"
 
     #Change External Sharing Settings to
     Write-Host "Changing External SharePoint site sharing settings.... "
