@@ -52,7 +52,7 @@ function getAllUsersPermissions {
 }
 function getPermissionsInSite {
     Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking 
-    Connect-SPOService -Url "https://gg0rsk1-admin.sharepoint.com" -ModernAuth $true -AuthenticationUrl "https://login.microsoftonline.com/organizations"
+    Connect-SPOService -Url "https://-admin.sharepoint.com" -ModernAuth $true -AuthenticationUrl "https://login.microsoftonline.com/organizations"
 
     # Prompt user for the site URL
     $SiteUrl = Read-Host -Prompt "Enter the Site URL"
@@ -113,7 +113,7 @@ function Show-Menu {
 
 # Main script
 Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking 
-Connect-SPOService -Url "https://gg0rsk1-admin.sharepoint.com" -ModernAuth $true -AuthenticationUrl "https://login.microsoftonline.com/organizations"
+Connect-SPOService -Url "https://-admin.sharepoint.com" -ModernAuth $true -AuthenticationUrl "https://login.microsoftonline.com/organizations"
 do {
     Show-Menu
     $choice = Read-Host "Enter your choice"
